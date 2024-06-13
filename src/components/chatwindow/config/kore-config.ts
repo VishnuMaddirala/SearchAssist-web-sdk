@@ -7,7 +7,7 @@ botOptions.koreAPIUrl = "https://bots.kore.ai/api/";
 
 botOptions.API_KEY_CONFIG={
     bootstrapURL:botOptions.koreAPIUrl+'platform/websdk',
-    KEY:'YOUR_API_KEY'
+    KEY:'4a141cf7b0fa4afd9370a144f90f461d80529a71c3884509b462a618421adff6st45'
 },
 botOptions.koreSpeechAPIUrl = "";//deprecated
 //botOptions.bearer = "bearer xyz-------------------";

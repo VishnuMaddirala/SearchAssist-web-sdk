@@ -6138,6 +6138,7 @@ FindlySDK.prototype.searchEventBinding = function (
             }
           }
         }
+        // console.log( " Here goes the search"+ JSON.stringify($("#search")));
         $("#search").trigger({ type: "keydown", which: 39 });
       });
       $(dataHTML)
@@ -6235,6 +6236,7 @@ FindlySDK.prototype.searchEventBinding = function (
     $(dataHTML)
       .off("keyup", "#search")
       .on("keyup", "#search", debounce(function (e) {
+        console.log("On Enter key, event here is triggered...")
         _self.trimSearchQuery(e);
          $('#query-feedback').empty()
          $('#snippet-feedback-template').empty();
@@ -6533,6 +6535,7 @@ FindlySDK.prototype.searchEventBinding = function (
                             var showAllHTML = _self.customTemplateObj.renderMessage(msgData);
                             if (!$("body").hasClass("top-down")) {
                               $(".search-body").empty().append(showAllHTML);
+                              console.log("Hey Vishnu..! It stopped here....")
                             }else{
                               $(".live-search-data-container").empty().append(showAllHTML);
                             }
@@ -7381,8 +7384,10 @@ FindlySDK.prototype.handleSearchRes = function (res) {
             // });
             // }, 300);
           });
-
-
+          console.log("HTML Rendering here...")
+          if(_self.vars.searchQueries.length > 0){
+            _self.performSearch();
+          }          
           setTimeout(function () {
             _self.bindSearchActionEvents();
           }, 500);
@@ -21154,7 +21159,13 @@ FindlySDK.prototype.getPopularSearchTemplate = function () {
      </script>';
 };
 FindlySDK.prototype.appendPopularSearchResults = function (popularSearches) {
+  
   var _self = this;
+  _self.vars.autoVariable = 0;
+  _self.vars.searchQueries = []; //sampleQueries
+  if(_self.vars.searchQueries.length > 0){
+            _self.performSearch();
+  }  
   $("#popular-search-results").empty();
   var template = $(
     _self.getPopularSearchTemplate("popularSearchTemplate")
@@ -21189,6 +21200,7 @@ FindlySDK.prototype.appendPopularSearchResults = function (popularSearches) {
       var e = $.Event("keydown", { which: 13 });
       $("#search").trigger(e);
     });
+
 };
 FindlySDK.prototype.showMoreClick = function (showMoreData) {
   var _self = this;
@@ -23796,5 +23808,24 @@ else{
   return snippetObj;
 }
 
+
+//Below code automates the testing of n number of queries.
+FindlySDK.prototype.performSearch = function(){
+  var _self = this;
+  if( _self.vars.searchQueries[_self.vars.autoVariable]){
+    $("#search").val(_self.vars.searchQueries[_self.vars.autoVariable]);
+    _self.vars.searchObject.searchText = _self.vars.searchQueries[_self.vars.autoVariable];
+    _self.vars.showingMatchedResults = true;
+    _self.searchFacetsList([]);
+    var e = $.Event("keydown", { which: 13 });
+    $("#search").trigger(e);
+    _self.vars.autoVariable += 1;
+  }else{
+    console.log("Finished Executing Search Queries");
+  }
+}
+
 FindlySDK.prototype.$ = $;
 export default FindlySDK;
+
+

@@ -14,16 +14,16 @@ var serverUrl = window.location.href;
 var paramUrl="searchassist.kore.ai";
 var httpStart = 'https://';
 var wssUrl = "wss";
-if(serverUrl && (serverUrl.includes("https://") || serverUrl.includes("http://"))){
-paramUrl=serverUrl.split('/')[2];
-if(serverUrl.includes("https://")){
-httpStart = "https://";
-wssUrl = "wss";
-}else{
-httpStart = "http://";
-wssUrl = "ws";
-}
-}  
+// if(serverUrl && (serverUrl.includes("https://") || serverUrl.includes("http://"))){
+// paramUrl=serverUrl.split('/')[2];
+// if(serverUrl.includes("https://")){
+// httpStart = "https://";
+// wssUrl = "wss";
+// }else{
+// httpStart = "http://";
+// wssUrl = "ws";
+// }
+// }  
 if(window?.JWT_OBJ && window?.JWT_OBJ?.koreAPIUrl){
   paramUrl=window.JWT_OBJ.koreAPIUrl.split("/")[2].split(':')[0];
     if(window.JWT_OBJ.koreAPIUrl.includes("https://")){
@@ -96,7 +96,7 @@ findlyConfig = {
     showTaskMenuPickerIcon: true, //set true to show TaskMenu Template icon
     showradioOptionMenuPickerIcon: false, //set true to show Radio Option Template icon
   },
-  API_KEY_CONFIG:{'KEY':"YOUR_API_KEY"}
+  API_KEY_CONFIG:{'KEY':"4a141cf7b0fa4afd9370a144f90f461d80529a71c3884509b462a618421adff6st45"}
 };
 
 export default findlyConfig;
